@@ -33,7 +33,7 @@
 			<tr>
 				<?php
 				include "data/init.php";	
-				$sql = "SHOW COLUMNS FROM myarttable";
+				$sql = "SHOW COLUMNS FROM Individuals";
 				$stmt = $pdoSet->query($sql);
 				$resultMFcols = $stmt->fetchAll();
 
@@ -46,7 +46,7 @@
 				
 			</tr>
 			</table>
-			<p style="font-size:12px;"><i>(в базу <b>test</b>, таблицу <b>myarttable</b> в MySQL)</i></p>
+			<p style="font-size:12px;"><i>(в базу <b>bank</b>, таблицу <b>Individuals</b> в MySQL)</i></p>
 			<hr />
 		</form>
 		<!-- КОНЕЦ форма добавления ВСПЛЫВАЮЩИЕ СТРОКИ -->
@@ -55,26 +55,21 @@
 		<table class='tView1'>
 			<tr class="hedTabl">
 				<?php
-					for ($iR=0; $iR < Count($resultMFcols); ++$iR) {
+					for ($iR = 0; $iR < Count($resultMFcols); ++$iR) {
 						?><td>
-						<a href="./index.php?order=<?php echo $resultMFcols[$iR]["Field"];?>" title="Сортировать по убыванию"><?php echo $resultMFcols[$iR]["Field"];?></a>
+								<a href="./index.php?order=<?php echo $resultMFcols[$iR]["Field"]; ?>" title="Сортировать по убыванию"><?php echo $resultMFcols[$iR]["Field"]; ?></a>
+							</td>
 						<?php
-							if ($iR > 0 ) {
-								?>
-						<a href="./index.php?delrow=<?php echo $resultMFcols[$iR]["Field"];?>" title="Удалить столбец"><img src="image/delrow.png"></a>
-						<a href="./index.php?addrow=<?php echo $resultMFcols[$iR]["Field"];?>" title="Добавить справа"><img src="image/addrow.png"></a>
-								<?php
-							}
-						?>
-						</td>
-						<?php
-					}
+						}
 				?>
 				<td class="act">&nbsp;</td><td class="act">&nbsp;</td><td class="act">&nbsp;</td>
 			</tr>
 			<?php
-			@ $iCountLine = Count($resultMF[0]);
-
+			if (isset($resultMF[0])) {
+				$iCountLine = Count($resultMF[0]);
+			} else {
+				$iCountLine = 0;
+			}
 			for ($iC = 0; $iC < Count($resultMF); $iC++) {
 				?><tr><?php
 				
@@ -95,25 +90,27 @@
 		<!-- НАЧАЛО модального окна -->
 		<link rel="stylesheet" href="style/modal.css" />
 		<div class="modal" data-modal="1">
-		   <!--   Svg иконка для закрытия окна  -->
-		   <svg class="modal__cross js-modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
-		   <p class="modal__title"><b>Отредактировать строку</b><br /></p>
-		   
-			<form action="index.php" method="get">   
-			   <input type="hidden" name="textId" id="textId" value="none 1 is error" />
-			   <div>
-			   <?php
-				for($iR = 1; $iR < $iCountLine; $iR++)
-					echo '<div>'.$resultMFcols[$iR]["Field"].' :</div>';
-			   ?>
-			   </div>
-			   <div>
-			   <?php
-				for($iR = 1; $iR < $iCountLine; $iR++)
-					echo '<input type="edit" name="textEd'.$iR.'" id="textEd'.$iR.'" value="none 1 is error" />';
-			   ?>			   
-			   </div>
-			   <br /><a href="practUpload/index.php?id=error" id="aId" target="_blank" class="bt">Добавить файлы</a>
+			<!--   Svg иконка для закрытия окна  -->
+			<svg class="modal__cross js-modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z" />
+			</svg>
+			<p class="modal__title"><b>Отредактировать строку</b><br /></p>
+
+			<form action="index.php" method="get">
+				<input type="hidden" name="textId" id="textId" value="none 1 is error" />
+				<div>
+					<?php
+					for ($iR = 1; $iR < $iCountLine; $iR++)
+						echo '<div>' . $resultMFcols[$iR]["Field"] . ' :</div>';
+					?>
+				</div>
+				<div>
+					<?php
+					for ($iR = 1; $iR < $iCountLine; $iR++)
+						echo '<input type="edit" name="textEd' . $iR . '" id="textEd' . $iR . '" value="none 1 is error" />';
+					?>
+				</div>
+				<br />
 				<input type="submit" name="bt2" value="Отредактировать" class="bt" />
 			</form>
 		   
