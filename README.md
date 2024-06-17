@@ -3,10 +3,10 @@
 
 Главное окно с таблицей:
 
-![image](https://user-images.githubusercontent.com/10297748/229701944-1ad7afec-8769-4103-815f-595eaa6d11c1.png)
+![photo_2024-06-17_20-36-54](https://github.com/Benqqa/practPHP/assets/53792741/61d874ba-d868-4b0a-a129-8d62314d6a93)
 
 Окно редактирования и добавления файлов:
 
-![image](https://user-images.githubusercontent.com/10297748/229702446-92ce177a-d48a-4e7a-9701-aadf2b486d7f.png)
+![photo_2024-06-17_20-41-12](https://github.com/Benqqa/practPHP/assets/53792741/cfbc8d92-0a4b-429d-9f58-6cf53f848f8a)
 
 Данные редактируются в этом примере независмо от количества столбцов. Можно добавлять, удалять столбцы в таблице из СУБД MySQL, что является главным отличием от проекта [practUpdate](https://github.com/alex1543/practUpdate). Исходники гарантированно работают под XAMPP Version 7.4.27. Для создания готовой структуры базы данных (БД) необходимо выполнить скрипт test.sql из каталога с исходниками. Иначе, структура БД будет создана сама из PHP.
